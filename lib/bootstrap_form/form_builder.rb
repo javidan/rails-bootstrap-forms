@@ -23,10 +23,11 @@ module BootstrapForm
         options = args.extract_options!.symbolize_keys!
 
         label = options.delete(:label)
+        group_class = options.delete(:group_class)
         label_class = hide_class if options.delete(:hide_label)
         help = options.delete(:help)
 
-        form_group(name, label: { text: label, class: label_class }, help: help) do
+        form_group(name, label: { text: label, class: label_class }, help: help, :class=>group_class) do
           options[:class] = "form-control #{options[:class]}".rstrip
           args << options.except(:prepend, :append)
           input = super(name, *args)
@@ -62,7 +63,8 @@ module BootstrapForm
     end
 
     def form_group(name = nil, options = {}, &block)
-      options[:class] = 'form-group'
+      options[:class] = 'form-group' if options[:class].blank?
+      options[:class] << options[:class] if options[:class].present?
       options[:class] << ' has-error' if has_error?(name)
 
       html = capture(&block)

@@ -1,3 +1,4 @@
+#changed
 module BootstrapForm
   class FormBuilder < ActionView::Helpers::FormBuilder
     attr_reader :style, :left_class, :right_class, :has_error

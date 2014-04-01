@@ -64,7 +64,7 @@ module BootstrapForm
 
     def form_group(name = nil, options = {}, &block)
       options[:class] = 'form-group' if options[:class].blank?
-      options[:class] << options[:class] if options[:class].present?
+      options[:class] << ' form-group' if options[:class].present?
       options[:class] << ' has-error' if has_error?(name)
 
       html = capture(&block)
